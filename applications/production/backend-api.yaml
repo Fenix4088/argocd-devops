@@ -1,0 +1,27 @@
+apiVersion: argoproj.io/v1alpha1
+kind: Application
+metadata:
+  name: backend-api          # имя приложения в ArgoCD UI
+  namespace: argocd          # namespace самого ArgoCD (всегда argocd)
+  finalizers:
+    - resources-finalizer.argocd.argoproj.io  # при удалении Application — удалить все связанные ресурсы из кластера
+spec:
+  destination:
+    name: in-cluster         # целевой кластер (in-cluster = тот же, где стоит ArgoCD)
+    namespace: default       # namespace куда деплоить приложение
+  source:
+    repoURL: "git@github.com:Fenix4088/argocd-devops.git"  # SSH-адрес репозитория
+    targetRevision: HEAD     # ветка/тег/коммит; HEAD = всегда последний коммит ветки по умолчанию
+    path: "helm-charts/backend-api"  # путь к чарту внутри репозитория
+    helm:
+      valueFiles:
+        - values.yaml                    # базовые значения
+        - values-production.yaml         # переопределения для production (образ, реплики и т.д.)
+        - secrets-production.yaml    # зашифрованные секреты (SOPS расшифрует автоматически)
+  project: default           # ArgoCD-проект (изоляция прав доступа); default — без ограничений
+  syncPolicy:
+    automated:
+      prune: true            # удалять ресурсы из кластера, если они исчезли из git
+      selfHeal: true         # возвращать состояние кластера к git, если кто-то изменил его вручную
+    syncOptions:
+      - CreateNamespace=true # создать namespace автоматически, если не существует

@@ -1,0 +1,44 @@
+namespace: default
+replicaCount: 2
+ 
+labels:
+  - name: app
+    value: backend-api
+ 
+image:
+  name: abazuntts/backend:latest
+  pullSecret: dockerhub-cred
+ 
+backend:
+  port: 3005
+ 
+probes:
+  health: /api/health
+  ready: /api/ready
+ 
+resources:
+  requests:
+    cpu: "60m"
+    memory: "100Mi"
+  limits:
+    cpu: "100m"
+    memory: "120Mi"
+ 
+envs:
+  configMap:
+    NODE_ENV: "production"
+    PORT: "3005"
+ 
+ingress:
+  host: api.plikap.com
+  tlsSecret: backend-api-tls
+  clusterIssuer: letsencrypt-prod
+ 
+hpa:
+  minReplicas: 1
+  maxReplicas: 5
+  cpuUtilization: 70
+  memoryUtilization: 80
+ 
+monitoring:
+  release: kube-prometheus-stack
