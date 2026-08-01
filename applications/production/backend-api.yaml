@@ -8,7 +8,7 @@ metadata:
 spec:
   destination:
     name: in-cluster         # целевой кластер (in-cluster = тот же, где стоит ArgoCD)
-    namespace: default       # namespace куда деплоить приложение
+    namespace: production       # namespace куда деплоить приложение
   source:
     repoURL: "git@github.com:Fenix4088/argocd-devops.git"  # SSH-адрес репозитория
     targetRevision: HEAD     # ветка/тег/коммит; HEAD = всегда последний коммит ветки по умолчанию

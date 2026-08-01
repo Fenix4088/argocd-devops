@@ -1,4 +1,3 @@
-namespace: default
 replicaCount: 2
  
 labels:
@@ -6,7 +5,7 @@ labels:
     value: backend-api
  
 image:
-  name: abazuntts/backend:latest
+  name: fenix4088/lessons-todo-back
   pullSecret: dockerhub-cred
  
 backend:
@@ -26,7 +25,7 @@ resources:
  
 envs:
   configMap:
-    NODE_ENV: "production"
+    NODE_ENV: "staging"
     PORT: "3005"
  
 ingress:

@@ -2,7 +2,7 @@ apiVersion: apps/v1
 kind: Deployment
 metadata:
   name: {{ .Chart.Name }}-deployment
-  namespace: {{ .Values.namespace }}
+  namespace: {{ .Release.Namespace }}
   labels:
     {{- range .Values.labels }}
     {{ .name }}: "{{ .value }}"
@@ -16,7 +16,7 @@ spec:
       {{- end }}
   template:
     metadata:
-      namespace: {{ .Values.namespace }}
+      namespace: {{ .Release.Namespace }}
       labels:
         {{- range .Values.labels }}
         {{ .name }}: "{{ .value }}"
