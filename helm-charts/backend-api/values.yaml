@@ -6,6 +6,10 @@ labels:
  
 image:
   name: fenix4088/lessons-todo-back
+  # TODO: заменить на конкретный тег или digest. С `latest` откат через
+  # ArgoCD History не работает: git-ревизия меняется, а образ — нет.
+  tag: latest
+  pullPolicy: IfNotPresent
   pullSecret: dockerhub-cred
  
 backend:
