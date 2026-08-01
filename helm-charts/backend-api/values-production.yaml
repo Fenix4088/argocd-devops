@@ -1,3 +1,5 @@
+image:
+  name: fenix4088/lessons-todo-back
 envs:
   configMap:
     NODE_ENV: "production"
