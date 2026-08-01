@@ -2,5 +2,5 @@ ingress:
   host: argocd.plikap.com
   tlsSecret: argocd-tls
   clusterIssuer: letsencrypt-prod
-  
-port: 80
+
+portName: https
