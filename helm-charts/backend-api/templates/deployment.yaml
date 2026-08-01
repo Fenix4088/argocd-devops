@@ -16,6 +16,9 @@ spec:
       {{- end }}
   template:
     metadata:
+      annotations:
+        configmap-hash: {{ .Values.envs.configMap | toJson | sha256sum }}
+        secret-hash: {{ .Values.secret | toJson | sha256sum }}
       namespace: {{ .Release.Namespace }}
       labels:
         {{- range .Values.labels }}
