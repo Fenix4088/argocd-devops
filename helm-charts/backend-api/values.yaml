@@ -13,7 +13,9 @@ backend:
  
 probes:
   health: /api/health
-  ready: /api/ready
+  # Приложение регистрирует /api/health/ready (см. RouterExplorer в логах).
+  # На /api/ready отдаётся 404, из-за чего pod никогда не становится Ready.
+  ready: /api/health/ready
  
 resources:
   requests:
