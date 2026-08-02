@@ -1,5 +1,5 @@
 image:
-  name: fenix4088/lessons-todo-back:sha-597e4a899581473e250ee3b03a65286a26ea1407
+  name: fenix4088/lessons-todo-back:sha-c82d6fe28b7d1463680ce7bec054cc91e83eb4e0
 envs:
   configMap:
     NODE_ENV: "production"
