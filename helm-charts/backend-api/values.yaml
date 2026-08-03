@@ -43,3 +43,9 @@ hpa:
  
 monitoring:
   release: kube-prometheus-stack
+
+securityContext:
+  runAsNonRoot: true
+  runAsUser: 1000
+  runAsGroup: 1000
+  readOnlyRootFilesystem: true
